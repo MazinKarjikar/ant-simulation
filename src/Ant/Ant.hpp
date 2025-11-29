@@ -2,11 +2,14 @@
 
 class Ant {
 private:
-    int x, y;
-    float direction;
+    int x{};
+    int y{};
+    float direction{};
+    const static int speed = 5;
 
 public:
-    Ant();
-    void move();
+    Ant() = default;
+    Ant(int x, int y);
+    void update();
     void randomDirectionChange();
 };

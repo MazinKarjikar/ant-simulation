@@ -1,8 +1,9 @@
 #include <SDL2/SDL.h>
 #include <cmath>
+#include "Simulation/Simulation.hpp"
 
-const int SCREEN_HEIGHT = 480;
-const int SCREEN_WIDTH = 680;
+const int SCREEN_HEIGHT = 800;
+const int SCREEN_WIDTH = 1800;
 
 void drawFilledCircle(SDL_Renderer* renderer, int centerX, int centerY, int radius) {
     for (int y = -radius; y <= radius; ++y) {
@@ -15,82 +16,87 @@ void drawFilledCircle(SDL_Renderer* renderer, int centerX, int centerY, int radi
 
 int main() {
 
-    SDL_Window* window = nullptr;
-    SDL_Renderer* renderer = nullptr;
+    Simulation sim = Simulation<3>();
 
-    SDL_Init(SDL_INIT_EVERYTHING);
-    SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &window, &renderer);
+    // SDL_Window* window = nullptr;
+    // SDL_Renderer* renderer = nullptr;
 
-    bool running = true;
-    SDL_Event event;
+    // SDL_Init(SDL_INIT_EVERYTHING);
+    // SDL_CreateWindowAndRenderer(SCREEN_WIDTH, SCREEN_HEIGHT, 0, &window, &renderer);
 
-    int SQUARE_SIZE = 50;
+    // bool running = true;
+    // SDL_Event event;
 
-    int x = 200;
-    int y = 200;
-    int vx = 0;
-    int vy = 0;
-    int speed = 10;
+    // int SQUARE_SIZE = 20;
 
-    while (running) {
-        while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_QUIT)
-                running = false;
-            if (event.type == SDL_KEYDOWN && !event.key.repeat) {
-                switch (event.key.keysym.sym) {
-                    case SDLK_UP:      vy -= speed; break;
-                    case SDLK_DOWN:    vy += speed; break;
-                    case SDLK_RIGHT:   vx += speed; break;
-                    case SDLK_LEFT:    vx -= speed; break;
-                    default: break;
-                }
-            }
-            if (event.type == SDL_KEYUP) {
-                switch (event.key.keysym.sym) {
-                    case SDLK_UP:      vy += speed; break;
-                    case SDLK_DOWN:    vy -= speed; break;
-                    case SDLK_RIGHT:   vx -= speed; break;
-                    case SDLK_LEFT:    vx += speed; break;
-                    default: break;
-                }
-            }
-        }
+    // int x = 200;
+    // int y = 200;
+    // int vx = 0;
+    // int vy = 0;
+    // int speed = 8;
 
-        // Clear screen with black
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-        SDL_RenderClear(renderer);
+    // while (running) {
+    //     while (SDL_PollEvent(&event)) {
+    //         if (event.type == SDL_QUIT)
+    //             running = false;
+    //         if (event.type == SDL_KEYDOWN && !event.key.repeat) {
+    //             switch (event.key.keysym.sym) {
+    //                 case SDLK_UP:      vy -= speed; break;
+    //                 case SDLK_DOWN:    vy += speed; break;
+    //                 case SDLK_RIGHT:   vx += speed; break;
+    //                 case SDLK_LEFT:    vx -= speed; break;
+    //                 default: break;
+    //             }
+    //         }
+    //         if (event.type == SDL_KEYUP) {
+    //             switch (event.key.keysym.sym) {
+    //                 case SDLK_UP:      vy += speed; break;
+    //                 case SDLK_DOWN:    vy -= speed; break;
+    //                 case SDLK_RIGHT:   vx -= speed; break;
+    //                 case SDLK_LEFT:    vx += speed; break;
+    //                 default: break;
+    //             }
+    //         }
+    //     }
 
-        // Draw a white rectangle
-        SDL_Rect rect = { x, y, SQUARE_SIZE, SQUARE_SIZE };
-        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-        SDL_RenderFillRect(renderer, &rect);
+    //     // Clear screen with black
+    //     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    //     SDL_RenderClear(renderer);
 
-        // Mirror on X
-        if (x + SQUARE_SIZE > SCREEN_WIDTH) {
-            SDL_Rect rect2 = { x - SCREEN_WIDTH, y, SQUARE_SIZE, SQUARE_SIZE };
-            SDL_RenderFillRect(renderer, &rect2);
-        }
-        // Mirror on Y
-        if (y + SQUARE_SIZE > SCREEN_HEIGHT) {
-            SDL_Rect rect2 = { x, y - SCREEN_HEIGHT, SQUARE_SIZE, SQUARE_SIZE };
-            SDL_RenderFillRect(renderer, &rect2);
-        }
+    //     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
-        // drawFilledCircle(renderer, 200, 200, 50);
+    //     // Draw a white circle
+    //     drawFilledCircle(renderer, x, y, 20);
 
-        // Display what was drawn
-        SDL_RenderPresent(renderer);
+    //     // Draw a white rectangle
+    //     // SDL_Rect rect = { x, y, SQUARE_SIZE, SQUARE_SIZE };
+    //     // SDL_RenderFillRect(renderer, &rect);
 
-        // Move rect
-        x = (x + vx + SCREEN_WIDTH) % SCREEN_WIDTH;
-        y = (y + vy + SCREEN_HEIGHT) % SCREEN_HEIGHT;
+    //     // Mirror on X
+    //     // if (x + SQUARE_SIZE > SCREEN_WIDTH) {
+    //     //     SDL_Rect rect2 = { x - SCREEN_WIDTH, y, SQUARE_SIZE, SQUARE_SIZE };
+    //     //     SDL_RenderFillRect(renderer, &rect2);
+    //     // }
+    //     // Mirror on Y
+    //     // if (y + SQUARE_SIZE > SCREEN_HEIGHT) {
+    //     //     SDL_Rect rect2 = { x, y - SCREEN_HEIGHT, SQUARE_SIZE, SQUARE_SIZE };
+    //     //     SDL_RenderFillRect(renderer, &rect2);
+    //     // }
 
-        SDL_Delay(16); // approximates 120 FPS
-    }
 
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
+    //     // Display what was drawn
+    //     SDL_RenderPresent(renderer);
+
+    //     // Move rect
+    //     x = (x + vx + SCREEN_WIDTH) % SCREEN_WIDTH;
+    //     y = (y + vy + SCREEN_HEIGHT) % SCREEN_HEIGHT;
+
+    //     SDL_Delay(16); // approximates 120 FPS
+    // }
+
+    // SDL_DestroyRenderer(renderer);
+    // SDL_DestroyWindow(window);
+    // SDL_Quit();
 
     return 0;
 }
