@@ -12,4 +12,6 @@ public:
     Ant(int x, int y);
     void update();
     void randomDirectionChange();
+    int getx() const;
+    int gety() const;
 };
