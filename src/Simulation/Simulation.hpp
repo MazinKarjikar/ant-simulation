@@ -15,7 +15,7 @@ private:
 public:
     Simulation() {
         for(std::size_t i = 0; i < Count; i++) {
-            ants[i] = Ant(300, 300);
+            ants[i] = Ant(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
         }
         SDL_Init(SDL_INIT_EVERYTHING);
         SDL_CreateWindowAndRenderer(
@@ -100,7 +100,7 @@ public:
             // x = (x + vx + SCREEN_WIDTH) % SCREEN_WIDTH;
             // y = (y + vy + SCREEN_HEIGHT) % SCREEN_HEIGHT;
 
-            SDL_Delay(16); // modifies update rate.
+            SDL_Delay(20); // modifies update rate.
         }
     }
 

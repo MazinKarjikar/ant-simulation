@@ -3,7 +3,9 @@
 
 int main() {
 
-    Simulation<3> sim;
+    Simulation<5000> sim;
+
+    sim.run();
 
     return 0;
 }

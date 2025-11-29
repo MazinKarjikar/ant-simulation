@@ -1,7 +1,7 @@
 #include "AntRenderer/AntRenderer.hpp"
 #include <cmath>
 
-const int ANT_RADIUS = 20;
+const int ANT_RADIUS = 3;
 
 void AntRenderer::draw(SDL_Renderer* renderer, const Ant& ant) {
     AntRenderer::drawFilledCircle(renderer, ant.getx(), ant.gety(), ANT_RADIUS);
