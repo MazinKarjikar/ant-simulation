@@ -14,6 +14,7 @@ link_directories(${SDL2_LIBRARY_DIRS})
 add_executable(main
     src/main.cpp
     src/Ant/Ant.cpp
+    src/AntRenderer/AntRenderer.cpp
 )
 
 target_include_directories(main PRIVATE
