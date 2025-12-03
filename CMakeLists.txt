@@ -15,6 +15,7 @@ add_executable(main
     src/main.cpp
     src/Ant/Ant.cpp
     src/AntRenderer/AntRenderer.cpp
+    src/util/util.cpp
 )
 
 target_include_directories(main PRIVATE

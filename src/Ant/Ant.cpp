@@ -1,4 +1,5 @@
 #include "Ant.hpp"
+#include "util/util.hpp"
 #include <random>
 #include <cmath>
 
@@ -13,12 +14,14 @@ std::normal_distribution<float> TURN_DIST(0.0f, 0.15f);
 
 Ant::Ant(int x, int y) : x(x), y(y), direction(DIST(gen)) {}
 
+// update the ant's position based on some logic
 void Ant::update() {
     x += static_cast<int>(speed * std::cos(direction));
     y += static_cast<int>(speed * std::sin(direction));
     randomDirectionChange();
 }
 
+// change direction slightly randomly
 void Ant::randomDirectionChange() {
     direction += TURN_DIST(gen);
     direction = std::remainder(direction, 2.0f * M_PI);

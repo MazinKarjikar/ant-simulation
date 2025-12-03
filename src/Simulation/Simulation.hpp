@@ -3,6 +3,7 @@
 #include <array>
 #include "Ant/Ant.hpp"
 #include "AntRenderer/AntRenderer.hpp"
+#include "main.hpp"
 
 template <std::size_t Count>
 class Simulation {
@@ -10,8 +11,6 @@ private:
     std::array<Ant, Count> ants;
     SDL_Renderer* renderer = nullptr;
     SDL_Window* window = nullptr;
-    const int SCREEN_WIDTH = 1800;
-    const int SCREEN_HEIGHT = 800;
 public:
     Simulation() {
         for(std::size_t i = 0; i < Count; i++) {

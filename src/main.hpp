@@ -1,4 +1,4 @@
 #pragma once
 
-extern const int SCREEN_HEIGHT;
-extern const int SCREEN_WIDTH;
+inline const int SCREEN_HEIGHT = 800;
+inline const int SCREEN_WIDTH = 1500;

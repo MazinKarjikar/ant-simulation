@@ -3,7 +3,7 @@
 
 int main() {
 
-    Simulation<5000> sim;
+    Simulation<50> sim;
 
     sim.run();
 
