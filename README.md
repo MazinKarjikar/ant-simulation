@@ -1,6 +1,6 @@
 # Ant Simulation
 
-SDL2 playground for a 2D ant-inspired simulation. Right now it opens a 680x480 window, animates a small white rectangle across the screen, and draws a filled circle as a placeholder for future visuals. The `Ant` class is stubbed in `src/Ant/` for later movement/behavior work.
+SDL2 playground for a 2D ant-inspired simulation. The program opens a 1500x800 window, spawns a small swarm of ants at the center, and has them wander with a random heading and slight Gaussian noise on their direction each frame. Ants are rendered as small filled circles.
 
 ## Prerequisites
 - CMake 3.15+ and a C++17 compiler (clang++/g++).
@@ -15,16 +15,19 @@ From the repository root:
 cmake -S . -B build
 cmake --build build
 ```
-This generates and compiles the `main` executable in `build/main`. Reconfigure with `-DCMAKE_BUILD_TYPE=Release` if you want an optimized build.
+This builds the `main` executable in `build/main`. Add `-DCMAKE_BUILD_TYPE=Release` for an optimized build.
 
 ## Run
 ```bash
 ./build/main
 ```
-An SDL2 window appears; close the window to exit. The frame delay is ~8ms (~120 FPS target).
+An SDL2 window appears and the ants begin moving. Close the window to exit.
 
 ## Project layout
 - `CMakeLists.txt` — CMake project, finds SDL2 via `pkg-config` and builds the `main` target.
-- `src/main.cpp` — SDL2 setup, render loop, and simple animated shapes.
-- `src/main.hpp` — shared screen dimension constants.
-- `src/Ant/` — early scaffolding for an `Ant` class (movement logic to be filled in).
+- `src/main.cpp` — entry point; instantiates and runs the simulation.
+- `src/main.hpp` — shared screen dimension constants (`SCREEN_WIDTH`/`SCREEN_HEIGHT`).
+- `src/Simulation/` — `Simulation<Count>` template that owns ants, SDL window/renderer, update/render loop.
+- `src/Ant/` — `Ant` class with simple random-walk movement.
+- `src/AntRenderer/` — drawing helpers for ants (filled circle rendering).
+- `src/util/` — miscellaneous helpers (e.g., distance to screen border).
