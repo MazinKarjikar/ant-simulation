@@ -5,7 +5,7 @@ private:
     int x{};
     int y{};
     float direction{};
-    inline static const int speed = 5;
+    inline static const int speed = 3;
 
 public:
     Ant() = default;

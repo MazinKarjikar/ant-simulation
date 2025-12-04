@@ -3,9 +3,38 @@
 #include <algorithm>
 #include <cmath>
 
-int util::distToBorder(const int x, const int y) {
-    return std::min(
-        std::min(std::abs(x - 0), std::abs(y - 0)),
-        std::min(std::abs(x - SCREEN_WIDTH), std::abs(y - SCREEN_HEIGHT))
-    );
+float util::distToBorder(const int x, const int y, const float direction) {
+    const float dx = std::cos(direction);
+    const float dy = std::sin(direction);
+
+    // Sentinel value
+    const float INF = static_cast<float>(SCREEN_WIDTH + SCREEN_HEIGHT);
+    float minTime = INF;
+
+    // Distance to vertical borders (x = 0 and x = SCREEN_WIDTH)
+    if (std::fabs(dx) > 1e-6f) {
+        const float timeToLeft = (0.0f - x) / dx;
+        if (timeToLeft >= 0.0f) minTime = std::min(minTime, timeToLeft);
+
+        const float timeToRight = (static_cast<float>(SCREEN_WIDTH) - x) / dx;
+        if (timeToRight >= 0.0f) minTime = std::min(minTime, timeToRight);
+    }
+
+    // Distance to horizontal borders (y = 0 and y = SCREEN_HEIGHT)
+    if (std::fabs(dy) > 1e-6f) {
+        const float timeToTop = (0.0f - y) / dy;
+        if (timeToTop >= 0.0f) minTime = std::min(minTime, timeToTop);
+
+        const float timeToBottom = (static_cast<float>(SCREEN_HEIGHT) - y) / dy;
+        if (timeToBottom >= 0.0f) minTime = std::min(minTime, timeToBottom);
+    }
+
+    // Compute intersection point along heading, then return pixel distance to it.
+    const float hitX = static_cast<float>(x) + minTime * dx;
+    const float hitY = static_cast<float>(y) + minTime * dy;
+    return distBetweenPoints(static_cast<float>(x), static_cast<float>(y), hitX, hitY);
+}
+
+float util::distBetweenPoints(float x1, float y1, float x2, float y2) {
+    return std::hypot(x2 - x1, y2 - y1);
 }
