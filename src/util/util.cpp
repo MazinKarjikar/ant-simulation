@@ -3,6 +3,15 @@
 #include <algorithm>
 #include <cmath>
 
+void util::drawFilledCircle(SDL_Renderer* renderer, const int centerX, const int centerY, const int radius) {
+    for (int y = -radius; y <= radius; ++y) {
+        int dx = (int)sqrt(radius * radius - y * y); // x distance from center for this y
+        int x1 = centerX - dx;
+        int x2 = centerX + dx;
+        SDL_RenderDrawLine(renderer, x1, centerY + y, x2, centerY + y);
+    }
+}
+
 float util::distToBorder(const int x, const int y, const float direction) {
     const float dx = std::cos(direction);
     const float dy = std::sin(direction);

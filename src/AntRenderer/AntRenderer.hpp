@@ -5,5 +5,4 @@
 
 namespace AntRenderer {
     void draw(SDL_Renderer*, const Ant&);
-    void drawFilledCircle(SDL_Renderer*, int, int, int);
 }
